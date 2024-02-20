@@ -20,8 +20,7 @@ afterAll(async () => {
   try {
     // Retrieve data from the database
     const [rows, fields] = await connection.execute(
-      'SELECT firstname, email FROM oc_customer WHERE firstName = ?',
-      [testData.user2.firstName[0]]
+      'SELECT * FROM oc_customer ORDER BY date_added DESC LIMIT 10'
     );
     
   } catch (error) {

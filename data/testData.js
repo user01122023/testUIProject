@@ -39,15 +39,7 @@ const testData = {
         "Last tt",                // 5: Disallowed whitespace
         " last",                 // 6: Leading space
         "last "                   // 7: Trailing space
-      ],
-      /*email: [
-        // Test cases for "email"
-        `user1@test.com`,  // 0: Valid email
-        "",                         // 1: Empty email
-        "invalid_email",            // 2: Invalid email format
-        " jane.doe@example.com",    // 3: Valid email with leading and trailing spaces
-        "jane.doe@example.com "   // 4: Valid email with trailing space
-      ], */
+      ],      
       telephone: [
         // Test cases for "telephone"
         "1".repeat(11),          // 0: numeric characters within limits
@@ -84,15 +76,18 @@ const testData = {
     ],
       securityCode: "5678"             // Arbitrary security code
     },
-    /*user3: {
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      email: faker.internet.email(),
-      telephone: faker.phone.phoneNumber(),
-      password: faker.internet.password(),
-      confirmPassword: faker.internet.password(),
-      securityCode: faker.random.number().toString()
-    },*/  
+    user3: {
+      email: [
+        // Test cases for "email"        
+        "testik@team948739.testinator.com",  // 0: new valid email
+        "invalid_email",                    // 1: invalid email
+        "",                                 // 2: empty email
+        "testik@team948739.testinator.com",  // 3: registred email
+        " test+lead@team948739.testinator.com", // 4: email with leading space
+        "test+trail@team948739.testinator.com ", // 5: email with trailing space
+        "test+whitesp@team 948739.testinator.com"  // 6: email with whitespaces
+      ], 
+    },  
   }
   
 ;

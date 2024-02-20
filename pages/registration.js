@@ -14,6 +14,8 @@ class RegistrationPage {
           this.agree_locator = page.getByRole('checkbox')
           this.continue_locator = page.getByRole('button', { name: 'Continue' })
           this.success_locator = page.getByRole('heading', { name: 'Your Account Has Been Created!' })
+          this.warning_email_message = page.getByText('Warning: E-Mail Address is')
+          this.warning_email_message_2 = page.getByText('Please include an @ in the email address.')
           this.error_first_name_message = page.getByText('First Name must be between 1')
           this.error_last_name_message = page.getByText('Last Name must be between 1')
           this.error_email_message = page.getByText('E-Mail Address does not')
@@ -67,7 +69,7 @@ class RegistrationPage {
     
       async doResetPassword(email) {
         await this.fillEmail(email)
-        await this.continue_button_locator.click()
+        await this.continue_locator.click()
         await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=account/login')
         await expect(this.messagePanel_locator).toHaveText(messages.forgot_password.success)
       

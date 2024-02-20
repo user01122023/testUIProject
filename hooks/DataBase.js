@@ -28,10 +28,16 @@ async function connectToDatabase(page) {
 
     // Perform database operations
     // For example, execute a query
-    const [rows, fields] = await connection.execute('SELECT * FROM oc_customer ORDER BY date_added DESC LIMIT 8');
-    // DELETE FROM `oc_customer` WHERE `oc_customer`.`date_added` = '2024-02-16';
-
+    const [rows, fields] = await connection.execute("SELECT * FROM oc_customer WHERE DATE(date_added) = '2024-02-20'");
+    
     console.log(rows);
+
+    //delete rows
+
+    //const [rows, fields] = await connection.execute("DELETE FROM oc_customer WHERE DATE(date_added) = '2024-02-19'");
+
+    //console.log(rows); 
+
     
     // Close the database connection
     await connection.end();

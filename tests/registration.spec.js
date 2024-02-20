@@ -1,16 +1,20 @@
 import { test, expect } from '@playwright/test';
 import RegistrationPage from '../pages/registration';
+import EmailPage from '../pages/mail';
 import testData from '../data/testData';
+import messages from '../data/messages';
 import faker from 'faker';
 
 test.describe('Registration Page Tests', () => {
   let page;
   let registrationPage;
+  let mail;
 
   test.beforeEach(async ({ browser }) => {
     page = await browser.newPage();
     registrationPage = new RegistrationPage(page);
     await registrationPage.gotoRegistrationPage();
+    
   });
 
   test.afterEach(async () => {
@@ -32,10 +36,10 @@ test.describe('Registration Page Tests', () => {
         confirmPassword[0] 
       );
       if (index === 0 || index === 1 || index === 2 || index === 5 || index === 6 || index === 7) {
-        await expect(registrationPage.success_locator).toHaveText('Your Account Has Been Created!');
+        await expect(registrationPage.success_locator).toHaveText(messages.registration.success);
             
       } else if (index === 3 || index === 4) {
-        await expect(registrationPage.error_first_name_message).toHaveText('First Name must be between 1 and 32 characters!');
+        await expect(registrationPage.error_first_name_message).toHaveText(messages.registration.invalidFirstName);
       } 
       
     });
@@ -55,10 +59,10 @@ test.describe('Registration Page Tests', () => {
         confirmPassword[0] 
       );
       if (index === 0 || index === 1 || index === 2 || index === 5 || index === 6 || index === 7) {
-        await expect(registrationPage.success_locator).toHaveText('Your Account Has Been Created!');
+        await expect(registrationPage.success_locator).toHaveText(messages.registration.success);
             
       } else if (index === 3 || index === 4) {
-        await expect(registrationPage.error_last_name_message).toHaveText('Last Name must be between 1 and 32 characters!');
+        await expect(registrationPage.error_last_name_message).toHaveText(messages.registration.invalidLastName);
       } 
       
     });
@@ -76,10 +80,10 @@ test.describe('Registration Page Tests', () => {
         confirmPassword[0] 
       );
       if (index === 0 || index === 1 || index === 2 || index === 5 || index === 6 || index === 7) {
-        await expect(registrationPage.success_locator).toHaveText('Your Account Has Been Created!');
+        await expect(registrationPage.success_locator).toHaveText(messages.registration.success);
             
       } else if (index === 3 || index === 4 || index === 8) {
-        await expect(registrationPage.error_telephone_message).toHaveText('Telephone must be between 3 and 32 characters!');
+        await expect(registrationPage.error_telephone_message).toHaveText(messages.registration.invalidTelephone);
       } 
       
     });
@@ -97,14 +101,46 @@ test.describe('Registration Page Tests', () => {
         password 
       );
       if (index === 0 || index === 1 || index === 2 || index === 5 || index === 6 || index === 7) {
-        await expect(registrationPage.success_locator).toHaveText('Your Account Has Been Created!');
+        await expect(registrationPage.success_locator).toHaveText(messages.registration.success);
             
       } else if (index === 3 || index === 4) {
-        await expect(registrationPage.error_password_message).toHaveText('Password must be between 4 and 20 characters!');
+        await expect(registrationPage.error_password_message).toHaveText(messages.registration.invalidPassword);
       } 
       
     });
-  })
+  });
+  testData.user3.email.forEach((email, index) => {
+    let testName = `Registration with email "${email}"`;
+    if (index === 3) { //index 3 corresponds to the repeated email
+        testName = `Registration with repeated email "${email}"`;
+    }
+    test.only(testName, async () => {
+      await registrationPage.doRegistration(
+        testData.user2.firstName[0],
+        lastName[0],
+        email,
+        telephone[0],
+        password[0], 
+        confirmPassword[0] 
+      );
+    
+      if (index === 0 || index === 4 || index === 5) {
+        await expect(registrationPage.success_locator).toHaveText(messages.registration.success);
+        
 
-
+      } else if (index === 2) {
+        await expect(registrationPage.error_email_message).toHaveText(messages.registration.invalidEmail);
+        
+      } else if (index === 3) {
+        await expect(registrationPage.warning_email_message).toHaveText(messages.registration.duplicatedEmail);
+      }
+        else if (index === 1 || index === 6) {
+         await expect(registrationPage.warning_email_message_2).toBeVisible()
+        }
+    });
+ 
+  });
 });
+
+
+ 
