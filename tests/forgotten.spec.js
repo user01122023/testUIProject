@@ -31,13 +31,6 @@ test.describe('Forgotten password', () => {
   test(`reset password with empty e-mail`, async () => {
     await forgottenPage.doResetPassword();
     await forgottenPage.resetWithEmptyEmail();
-  })
-  // exicting email
-
-  
-
-  
-  
-
+  });  
   
 });

@@ -3,7 +3,7 @@
 
 const testData = {
   loginTestData: {
-    validEmail: 'anastasia1@mailinator.com',
+    validEmail: 'anastasia@team948739.testinator.com',
     validPassword: '123456',
     invalidEmail: 'john1@example.com',
     invalidPassword: 'password23',

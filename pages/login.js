@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import messages from '../data/messages';
+import { pages } from '../data/pagesURLs'; 
 
 class LoginPage {
 
@@ -15,7 +16,7 @@ class LoginPage {
     }
 
     async gotoLoginPage() {
-        await this.page.goto('https://eurosmeta.com/index.php?route=account/login')
+        await this.page.goto(pages.loginPage)
     }
     
     async fillEmail(email) {
@@ -30,7 +31,7 @@ class LoginPage {
         await this.login_button_locator.click()
     }
     async checkLoggedIn() {
-        await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=account/account')
+        await expect(this.page).toHaveURL(pages.accountPage)
         await expect(this.page).toHaveTitle('My Account')   
     }
     async checkInvalidCredentials() {
@@ -44,11 +45,11 @@ class LoginPage {
     }
     async forgottenPasswordLink() {
         await this.forgotten_password_link_locator.click()
-        await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=account/forgotten')
+        await expect(this.page).toHaveURL(pages.forgottenPage)
     }
     async restoreForgottenPassword() {
         await this.forgotten_password_link_locator.click()
-        await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=account/forgotten')
+        await expect(this.page).toHaveURL(pages.forgottenPage)
         await this.forgotten_password_email_locator.fill(email)
         
     }

@@ -5,7 +5,7 @@ import mysql from 'mysql2/promise';
 let connection;
 
 // Perform setup tasks before running the tests
-beforeAll(async () => {
+export async function beforeAll() {
   // Connect to the database
   connection = await mysql.createConnection({
     host: '37.140.192.134',
@@ -13,26 +13,23 @@ beforeAll(async () => {
     password: 'admin12345',
     database: 'u0237203_openstore'
   });
-});
+  console.log('DB connection was established');
+  // delete data from the database
+  const [rows, fields] = await connection.execute("DELETE FROM oc_customer WHERE DATE(date_added) = '2024-02-21'");
+  
+  console.log('Data were clened from the DB');
+  
+};
 
 // Perform teardown tasks after running all the tests
-afterAll(async () => {
-  try {
-    // Retrieve data from the database
-    const [rows, fields] = await connection.execute(
-      'SELECT * FROM oc_customer ORDER BY date_added DESC LIMIT 10'
-    );
-    
-  } catch (error) {
-    console.error('Error retrieving data from the database:', error);
-    throw error;
-
-  } finally {
-   
-    // delete data from the database
-    await connection.execute('DELETE FROM oc_customer WHERE email = ?', [testData.user2.firstName[0]]);
-
+export async function afterAll() {
+  // Retrieve data from the database
+  const [rows, fields] = await connection.execute("SELECT * FROM oc_customer WHERE DATE(date_added) = '2024-02-21'");
+  console.log(rows);
     // Close the database connection
     await connection.end();
-  }
-});
+  
+};
+
+
+

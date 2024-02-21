@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { pages } from '../data/pagesURLs';
 
 class FooterPage {
   constructor (page) {
@@ -32,7 +33,7 @@ class FooterPage {
   }
 
   async gotoHomePage() {
-    await this.page.goto('https://eurosmeta.com')
+    await this.page.goto(pages.mainPage)
   }
 
   async checkHeaderInformation() {      
@@ -43,42 +44,42 @@ class FooterPage {
   async checkLinkAboutUs() {
     await this.about_us_locator.waitFor({ state: 'visible' });
     await this.about_us_locator.click()
-    await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=information/information&information_id=4')
+    await expect(this.page).toHaveURL(pages.aboutUsPage)
     await expect(this.page).toHaveTitle('About Us')   
   }
 
   async checkLinkDeliveryInformation() {
     await this.delivery_information_locator.waitFor({ state: 'visible' });
     await this.delivery_information_locator.click()
-    await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=information/information&information_id=6')
+    await expect(this.page).toHaveURL(pages.deliveryInformationPage)
     await expect(this.page).toHaveTitle('Delivery Information')   
   }
 
   async checkLinkPrivacyPolicy() {
     await this.privacy_policy_locator.waitFor({ state: 'visible' });
     await this.privacy_policy_locator.click()
-    await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=information/information&information_id=3')
+    await expect(this.page).toHaveURL(pages.privacyPolicyPage)
     await expect(this.page).toHaveTitle('Privacy Policy')   
   }
 
   async checkLinkTermsAndConditions() {
     await this.terms_and_conditions_locator.waitFor({ state: 'visible' });
     await this.terms_and_conditions_locator.click()
-    await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=information/information&information_id=5')
+    await expect(this.page).toHaveURL(pages.termsAndConditionsPage)
     await expect(this.page).toHaveTitle('Terms & Conditions')
   }
 
   async checkLinkContactUs() {
     await this.contact_us_locator.waitFor({ state: 'visible' });
     await this.contact_us_locator.click()
-    await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=information/contact')
+    await expect(this.page).toHaveURL(pages.contactUsPage)
     await expect(this.page).toHaveTitle('Contact Us')
   }
 
   async checkLinkReturns() {
     await this.returns_locator.waitFor({ state: 'visible' });
     await this.returns_locator.click()
-    await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=account/return/add')
+    await expect(this.page).toHaveURL(pages.productReturnsPage)
     await expect(this.page).toHaveTitle('Product Returns')
   }
 

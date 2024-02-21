@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import messages from '../data/messages';
+import { pages } from '../data/pagesURLs';
 
 class ForgottenPage {
 
@@ -11,7 +12,7 @@ class ForgottenPage {
     }
 
     async gotoForgottenPage() {
-        await this.page.goto('https://eurosmeta.com/index.php?route=account/forgotten')
+        await this.page.goto(pages.forgottenPage)
     }
     
     async fillEmail(email) {
@@ -21,7 +22,7 @@ class ForgottenPage {
     async doResetPassword(email) {
         await this.fillEmail(email)
         await this.continue_button_locator.click()
-        await expect(this.page).toHaveURL('https://eurosmeta.com/index.php?route=account/login')
+        await expect(this.page).toHaveURL(pages.loginPage)
         await expect(this.messagePanel_locator).toHaveText(messages.forgot_password.success)
         
     }

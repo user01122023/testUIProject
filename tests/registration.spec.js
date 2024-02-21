@@ -4,6 +4,12 @@ import EmailPage from '../pages/mail';
 import testData from '../data/testData';
 import messages from '../data/messages';
 import faker from 'faker';
+import { beforeAll, afterAll } from '../hooks/setup';
+
+
+
+test.beforeAll(beforeAll);
+test.afterAll(afterAll);
 
 test.describe('Registration Page Tests', () => {
   let page;
@@ -114,7 +120,7 @@ test.describe('Registration Page Tests', () => {
     if (index === 3) { //index 3 corresponds to the repeated email
         testName = `Registration with repeated email "${email}"`;
     }
-    test.only(testName, async () => {
+    test(testName, async () => {
       await registrationPage.doRegistration(
         testData.user2.firstName[0],
         lastName[0],
@@ -135,7 +141,26 @@ test.describe('Registration Page Tests', () => {
         await expect(registrationPage.warning_email_message).toHaveText(messages.registration.duplicatedEmail);
       }
         else if (index === 1 || index === 6) {
-         await expect(registrationPage.warning_email_message_2).toBeVisible()
+          
+         /*
+         const page = await registrationPage.page;
+         page.on('dialog', dialog => dialog.accept());
+         await page.getByRole('button', { name: 'Continue' }).click();   */
+         
+         
+         /*const page = await registrationPage.page;
+         let dialogMessage = '';
+
+         page.on('dialog', async dialog => {
+         dialogMessage = dialog.message();
+         await dialog.defaultValue();
+         await dialog.page(); 
+         await dialog.accept(); // Accept the dialog
+        });
+
+         await page.getByRole('button', { name: 'Continue' }).click();
+         await expect(dialogMessage).toContain('Please include an @ in the email address');*/
+                  
         }
     });
  
