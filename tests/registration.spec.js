@@ -140,9 +140,15 @@ test.describe('Registration Page Tests', () => {
       } else if (index === 3) {
         await expect(registrationPage.warning_email_message).toHaveText(messages.registration.duplicatedEmail);
       }
-        else if (index === 1 || index === 6) {
-          
-         /*
+        else if (index === 1 || index === 6) {            
+            await page.screenshot({ path: 'data/invalidEmail-'+email+'.png', fullPage: true });                  
+        }
+    });
+ 
+  });
+});
+
+/*
          const page = await registrationPage.page;
          page.on('dialog', dialog => dialog.accept());
          await page.getByRole('button', { name: 'Continue' }).click();   */
@@ -160,12 +166,4 @@ test.describe('Registration Page Tests', () => {
 
          await page.getByRole('button', { name: 'Continue' }).click();
          await expect(dialogMessage).toContain('Please include an @ in the email address');*/
-                  
-        }
-    });
- 
-  });
-});
-
-
  

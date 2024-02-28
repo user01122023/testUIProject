@@ -15,7 +15,7 @@ export async function beforeAll() {
   });
   console.log('DB connection was established');
   // delete data from the database
-  const [rows, fields] = await connection.execute("DELETE FROM oc_customer WHERE DATE(date_added) = '2024-02-21'");
+  const [rows, fields] = await connection.execute("DELETE FROM oc_customer WHERE DATE(date_added) = '2024-02-28'");
   
   console.log('Data were clened from the DB');
   
@@ -24,7 +24,7 @@ export async function beforeAll() {
 // Perform teardown tasks after running all the tests
 export async function afterAll() {
   // Retrieve data from the database
-  const [rows, fields] = await connection.execute("SELECT * FROM oc_customer WHERE DATE(date_added) = '2024-02-21'");
+  const [rows, fields] = await connection.execute("SELECT * FROM oc_customer WHERE DATE(date_added) = '2024-02-28'");
   console.log(rows);
     // Close the database connection
     await connection.end();
