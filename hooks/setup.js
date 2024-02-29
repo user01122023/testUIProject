@@ -24,7 +24,7 @@ export async function beforeAll() {
 // Perform teardown tasks after running all the tests
 export async function afterAll() {
   // Retrieve data from the database
-  const [rows, fields] = await connection.execute("SELECT * FROM oc_customer WHERE DATE(date_added) = '2024-02-28'");
+  const [rows, fields] = await connection.execute("SELECT * FROM oc_customer WHERE DATE(date_added) = '2024-02-29'");
   console.log(rows);
     // Close the database connection
     await connection.end();
