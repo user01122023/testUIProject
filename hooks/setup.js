@@ -25,6 +25,7 @@ export async function beforeAll() {
 export async function afterAll() {
   // Retrieve data from the database
   const [rows, fields] = await connection.execute("SELECT * FROM oc_customer WHERE DATE(date_added) = '2024-02-29'");
+  //SELECT * FROM oc_customer WHERE date_added BETWEEN DATE_SUB(NOW(), INTERVAL 1 DAY) AND NOW()
   console.log(rows);
     // Close the database connection
     await connection.end();

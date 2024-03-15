@@ -13,6 +13,7 @@ const pages = {
     termsAndConditionsPage: use.baseURL + 'index.php?route=information/information&information_id=5',
     contactUsPage: use.baseURL + 'index.php?route=information/contact',
     productReturnsPage: use.baseURL + 'index.php?route=account/return/add',
+    productPage: use.baseURL + 'index.php?route=product/product&product_id=42'
    }
 
 export{ pages }

@@ -20,5 +20,8 @@ export default {
         success: ' An email with a confirmation link has been sent your email address.',
         invalid: ' Warning: The E-Mail Address was not found in our records, please try again!'
         
+    },
+    product: {
+        success: 'Success: You have added',
     }
 };
